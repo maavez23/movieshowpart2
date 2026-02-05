@@ -1,12 +1,17 @@
+// ================== CONFIG ==================
+const API_BASE = "http://localhost:3000"; 
+// later → https://your-app.onrender.com
+
 // ================== GET MOVIE ID ==================
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
+
 if (!movieId) {
   alert("Invalid movie");
   window.location.href = "index.html";
 }
 
-// ================== DOM ELEMENTS ==================
+
 const posterEl = document.getElementById("poster");
 const titleEl = document.getElementById("title");
 const metaEl = document.getElementById("meta");
