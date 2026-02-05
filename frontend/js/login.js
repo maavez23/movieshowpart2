@@ -1,7 +1,3 @@
-// ================== CONFIG ==================
-const API_BASE = "http://localhost:3000";
-// later → https://your-app.onrender.com
-
 function login() {
   const email = document.getElementById("email").value.trim();
   const password = document.getElementById("password").value.trim();
@@ -13,7 +9,7 @@ function login() {
     return;
   }
 
-  // 🔑 ADMIN LOGIN (TEMP – DEMO ONLY)
+  // 🔑 ADMIN LOGIN (DEMO)
   if (email === "admin" && password === "admin") {
     msg.style.color = "#2ecc71";
     msg.innerText = "Admin login successful";
@@ -33,12 +29,10 @@ function login() {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ email, password })
   })
-    .then(async res => {
-      const data = await res.json();
-      if (!res.ok) throw data;
-      return data;
-    })
+    .then(res => res.json())
     .then(data => {
+      if (!data.token) throw data;
+
       localStorage.setItem("token", data.token);
       localStorage.setItem("role", "USER");
 
@@ -51,7 +45,6 @@ function login() {
     })
     .catch(err => {
       msg.style.color = "red";
-      msg.innerText =
-        err.message || "Invalid email or password";
+      msg.innerText = err.message || "Invalid email or password";
     });
 }
