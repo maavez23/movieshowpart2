@@ -1,7 +1,3 @@
-// ================== CONFIG ==================
-const API_BASE = "http://localhost:3000"; 
-// later → https://your-app.onrender.com
-
 document.getElementById("checkoutBtn").addEventListener("click", async () => {
   if (!selectedSeats || selectedSeats.length === 0) {
     alert("Please select seats");
@@ -9,7 +5,8 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
   }
 
   const bookingData = {
-    movie_id: localStorage.getItem("movieId"),
+    user_id: 1, // 🔴 TEMP FIX (until JWT decode)
+    movie_id: Number(localStorage.getItem("movieId")),
     show_date: localStorage.getItem("showDate"),
     show_time: localStorage.getItem("showTime"),
     seats: selectedSeats,
@@ -20,8 +17,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
     const res = await fetch(`${API_BASE}/api/bookings`, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
-        "Authorization": `Bearer ${localStorage.getItem("token")}`
+        "Content-Type": "application/json"
       },
       body: JSON.stringify(bookingData)
     });
@@ -36,7 +32,7 @@ document.getElementById("checkoutBtn").addEventListener("click", async () => {
     window.location.href = "success.html";
 
   } catch (err) {
-    console.error(err);
+    console.error("BOOKING ERROR:", err);
     alert(err.message || "Booking Failed ❌");
   }
 });
