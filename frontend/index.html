@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>QuickShow</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar">
+  <div class="logo">Quick<span>Show</span></div>
+
+  <div class="nav-pill">
+    <a href="#">Home</a>
+    <a href="#">Movies</a>
+    <a href="#">Events</a>
+ 
+  </div>
+
+  <button class="login-btn" id="loginBtn">Login</button>
+
+</nav>
+<section class="hero">
+  <div class="hero-overlay"></div>
+
+  <div class="hero-card">
+    <img src="assets/posters/marvel.png" class="studio-logo">
+
+    <h1>Guardians<br>of the Galaxy</h1>
+
+    <div class="meta">
+      Action • Adventure • Sci-Fi &nbsp; | &nbsp; 2018 &nbsp; | &nbsp; 2h 8m
+    </div>
+
+    <p class="desc">
+      In a post-apocalyptic world where cities ride on wheels and consume each other to survive, two people meet in London and try to stop a conspiracy.
+    </p>
+
+    <button class="cta-btn">Explore Movies →</button>
+  </div>
+</section>
+
+  
+<section class="now-showing">
+  <div class="section-header">
+    <h2>Now Showing</h2>
+    <a href="#" class="view-all">View All →</a>
+  </div>
+
+  <div class="movie-list" id="movieList">
+  
+  </div>
+</section>
+
+  <script src="js/main.js"></script>
+
+
+  <!-- LOGIN BUTTON LOGIC -->
+  <script>
+    const loginBtn = document.getElementById("loginBtn");
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      loginBtn.textContent = "Logout";
+      loginBtn.onclick = () => {
+        localStorage.removeItem("token");
+        window.location.reload();
+      };
+    } else {
+      loginBtn.onclick = () => {
+        window.location.href = "login.html";
+      };
+    }
+  </script>
+
+
+
+</body>
+</html>

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Select Seats</title>
+  <link rel="stylesheet" href="css/seats.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Quick<span>Show</span></div>
+</nav>
+
+<div class="seat-page">
+
+  <!-- LEFT: SHOW INFO -->
+  <aside class="timing-panel">
+    <h4>Selected Show</h4>
+    <p><strong>Date:</strong> <span id="showDate"></span></p>
+    <p><strong>Time:</strong> <span id="showTime"></span></p>
+  </aside>
+
+  <!-- CENTER: SEAT SELECTION -->
+  <main class="seat-area">
+    <h3>Select your seat</h3>
+
+    <div class="screen">
+      <div class="screen-curve"></div>
+      <span>SCREEN SIDE</span>
+    </div>
+
+    <div class="seats" id="seatsContainer">
+      <!-- seats JS se generate honge -->
+    </div>
+
+    <button id="checkoutBtn" class="checkout-btn" disabled>
+      Proceed to Checkout →
+    </button>
+  </main>
+
+</div>
+
+<script src="js/booking.js"></script>
+</body>
+</html>

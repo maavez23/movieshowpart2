@@ -1,0 +1,177 @@
+body {
+  background: #0b0b0f;
+  color: white;
+  font-family: Poppins, sans-serif;
+  margin: 0;
+}
+
+.navbar {
+  padding: 20px 40px;
+}
+
+.screen {
+  width: 60%;
+  margin: 20px auto;
+  padding: 10px;
+  text-align: center;
+  background: #222;
+  border-radius: 10px;
+  color: #aaa;
+}
+
+.seats-container {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 12px;
+  max-width: 600px;
+  margin: 40px auto;
+}
+
+.seat {
+  width: 45px;
+  height: 45px;
+  border-radius: 8px;
+  background: #1c2433;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background: #ff3d5a;
+}
+
+.seat.booked {
+  background: #555;
+  cursor: not-allowed;
+}
+
+.summary {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #141b27;
+  padding: 20px 30px;
+  border-radius: 18px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
+}
+
+#confirmBtn {
+  background: #ff3d5a;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 25px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+body {
+  margin: 0;
+  background: #0b0b0d;
+  color: white;
+  font-family: Arial, sans-serif;
+}
+
+.navbar {
+  padding: 20px 40px;
+}
+
+.logo span { color: #ff4d6d; }
+
+.seat-page {
+  display: flex;
+  padding: 40px;
+}
+
+/* LEFT PANEL */
+.timing-panel {
+  width: 220px;
+  padding: 20px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, #3a0f1b, #140a0d);
+}
+
+.time-pill {
+  margin-top: 15px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid #ff4d6d;
+  text-align: center;
+}
+
+/* CENTER */
+.seat-area {
+  flex: 1;
+  text-align: center;
+}
+
+.screen {
+  margin: 20px auto 30px;
+}
+
+.screen-curve {
+  width: 280px;
+  height: 6px;
+  background: #ff4d6d;
+  margin: auto;
+  border-radius: 0 0 40px 40px;
+  opacity: 0.6;
+}
+
+.screen span {
+  font-size: 12px;
+  opacity: 0.7;
+}
+
+/* SEATS */
+.seats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.row-label {
+  width: 20px;
+  text-align: right;
+  margin-right: 10px;
+  opacity: 0.6;
+}
+
+.seat {
+  width: 34px;
+  height: 34px;
+  border: 1px solid #ff4d6d;
+  border-radius: 6px;
+  font-size: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.seat.selected {
+  background: #ff4d6d;
+}
+
+.gap {
+  height: 12px;
+}
+
+.checkout-btn {
+  margin-top: 30px;
+  padding: 14px 30px;
+  background: #ff4d6d;
+  border: none;
+  border-radius: 30px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}

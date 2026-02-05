@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Register | QuickShow</title>
+  <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+
+  <div class="auth-container">
+    <h1>Quick<span>Show</span></h1>
+    <p>Create account to book tickets</p>
+
+    <input type="text" id="name" placeholder="Full Name">
+    <input type="email" id="email" placeholder="Email">
+    <input type="password" id="password" placeholder="Password">
+
+    <button onclick="register()">Register</button>
+
+    <p class="register-text">
+      Already have an account? <a href="login.html">Login</a>
+    </p>
+
+    <p class="msg" id="msg"></p>
+  </div>
+
+  <script src="js/register.js"></script>
+</body>
+</html>

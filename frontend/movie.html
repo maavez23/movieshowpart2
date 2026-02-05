@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Movie Details</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">Quick<span>Show</span></div>
+</nav>
+
+<section class="movie-detail">
+  <img id="poster" class="detail-poster">
+
+  <div class="detail-info">
+    <h1 id="title"></h1>
+    <p id="meta"></p>
+    <p id="desc"></p>
+
+    <div class="detail-actions">
+      <button class="buy-btn">Buy Tickets</button>
+      <button class="btn-trailer">Watch Trailer</button>
+    </div>
+
+  
+  <div class="booking-container" style="display:none;">
+  <h4 class="choose-date-title">Choose Date</h4>
+
+  <div class="date-slider">
+    <button class="arrow" id="prevDate">&lt;</button>
+
+    <div class="dates" id="datesContainer"></div>
+
+    <button class="arrow" id="nextDate">&gt;</button>
+  </div>
+
+  <!-- 🔽 SHOW TIMINGS (DATE KE NICHE) -->
+  <div class="timings-container">
+    <h4 class="choose-date-title">Select Time</h4>
+     <div class="timings-grid">
+      <button class="time-slot">10:30 AM</button>
+      <button class="time-slot">1:45 PM</button>
+      <button class="time-slot">4:15 PM</button>
+      <button class="time-slot">7:30 PM</button>
+      <button class="time-slot">10:45 PM</button>
+
+    </div>
+  <div class="book-action">
+  <button id="bookNowBtn" class="book-now-btn" disabled>
+    Book Tickets →
+  </button>
+</div>
+
+  </div>
+</div>
+</div>
+</section>
+<script src="js/movie.js"></script>
+</body>
+</html>
