@@ -1,7 +1,3 @@
-// ================== CONFIG ==================
-const API_BASE = "http://localhost:3000";
-// later → https://your-app.onrender.com
-
 const table = document.getElementById("bookingTable");
 const token = localStorage.getItem("token");
 
@@ -10,12 +6,8 @@ if (!table) {
 }
 
 // ================== FETCH BOOKINGS (ADMIN) ==================
-fetch(`${API_BASE}/api/bookings`, {
-  headers: {
-    "Authorization": `Bearer ${token}`
-  }
-})
-  .then(async res => {
+fetch(`${API_BASE}/api/bookings`)
+  .then(res => {
     if (!res.ok) throw new Error("Failed to load bookings");
     return res.json();
   })
@@ -36,7 +28,6 @@ fetch(`${API_BASE}/api/bookings`, {
 
     data.forEach(b => {
       const tr = document.createElement("tr");
-
       tr.innerHTML = `
         <td>${b.email}</td>
         <td>${b.movie}</td>
@@ -45,7 +36,6 @@ fetch(`${API_BASE}/api/bookings`, {
         <td>${b.seats}</td>
         <td>₹${b.total_price}</td>
       `;
-
       fragment.appendChild(tr);
     });
 
