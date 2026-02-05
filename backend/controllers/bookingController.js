@@ -1,9 +1,6 @@
-const pool = require("../config/db");
-
-// ================== CREATE BOOKING ==================
 exports.createBooking = async (req, res) => {
   try {
-    const {
+    let {
       user_id,
       movie_id,
       show_date,
@@ -12,29 +9,38 @@ exports.createBooking = async (req, res) => {
       total_price
     } = req.body;
 
-    const sql = `
+    // 🔴 TEMP FIX (until JWT auth)
+    if (!user_id) user_id = 1;
+
+    if (!movie_id || !show_date || !show_time || !seats?.length) {
+      return res.status(400).json({ message: "Invalid booking data" });
+    }
+
+    const result = await pool.query(
+      `
       INSERT INTO bookings 
       (user_id, movie_id, show_date, show_time, seats, total_price)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id
-    `;
-
-    const result = await pool.query(sql, [
-      user_id,
-      movie_id,
-      show_date,
-      show_time,
-      seats.join(","),   // array → string
-      total_price
-    ]);
+      `,
+      [
+        user_id,
+        movie_id,
+        show_date,
+        show_time,
+        seats.join(","), // ✅ array → string
+        total_price
+      ]
+    );
 
     res.json({
       message: "Booking successful",
       booking_id: result.rows[0].id
     });
+
   } catch (err) {
-    console.error("DB ERROR:", err);
-    res.status(500).json({ error: err.message });
+    console.error("BOOKING ERROR:", err);
+    res.status(500).json({ message: err.message });
   }
 };
 
