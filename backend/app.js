@@ -5,10 +5,7 @@ const path = require("path");
 const app = express();
 
 /* ================== MIDDLEWARE ================== */
-app.use(cors({
-  origin: "*",
-  methods: ["GET", "POST", "PUT", "DELETE"]
-}));
+app.use(cors());
 app.use(express.json());
 
 /* ================== API ROUTES ================== */
@@ -22,11 +19,12 @@ app.get("/health", (req, res) => {
 });
 
 /* ================== FRONTEND ================== */
-app.use(express.static(path.join(__dirname, "../frontend")));
+const frontendPath = path.join(__dirname, "../frontend");
+app.use(express.static(frontendPath));
 
-/* ✅ FIXED WILDCARD ROUTE (Node 22 SAFE) */
-app.get("/*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/index.html"));
+/* ✅ SPA FALLBACK — NODE 22 SAFE */
+app.use((req, res) => {
+  res.sendFile(path.join(frontendPath, "index.html"));
 });
 
 module.exports = app;
