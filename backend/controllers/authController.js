@@ -4,9 +4,9 @@ const jwt = require("jsonwebtoken");
 
 // ================== REGISTER ==================
 exports.register = async (req, res) => {
-  try {
-    const { name, email, password } = req.body;
+  const { name, email, password } = req.body;
 
+  try {
     const hash = bcrypt.hashSync(password, 10);
 
     await pool.query(
@@ -15,20 +15,18 @@ exports.register = async (req, res) => {
     );
 
     res.json({ message: "User Registered Successfully" });
+
   } catch (err) {
-    // duplicate email error
-    if (err.code === "23505") {
-      return res.status(409).json({ message: "Email already exists" });
-    }
-    res.status(400).json({ error: err.message });
+    console.error("REGISTER ERROR:", err); // 👈 IMPORTANT
+    res.status(500).json({ message: "Registration failed" });
   }
 };
 
 // ================== LOGIN ==================
 exports.login = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+  const { email, password } = req.body;
 
+  try {
     const result = await pool.query(
       "SELECT * FROM users WHERE email = $1",
       [email]
@@ -39,20 +37,21 @@ exports.login = async (req, res) => {
     }
 
     const user = result.rows[0];
-
     const valid = bcrypt.compareSync(password, user.password);
+
     if (!valid) {
       return res.status(401).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign(
-      { id: user.id },
-      process.env.JWT_SECRET || "SECRET",
-      { expiresIn: "1d" }
-    );
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
+      expiresIn: "1d"
+    });
 
     res.json({ token });
+
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    console.error("LOGIN ERROR:", err); // 👈 IMPORTANT
+    res.status(500).json({ message: "Login failed" });
   }
 };
+
