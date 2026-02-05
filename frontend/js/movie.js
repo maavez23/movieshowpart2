@@ -1,7 +1,3 @@
-// ================== CONFIG ==================
-const API_BASE = "http://localhost:3000"; 
-// later → https://your-app.onrender.com
-
 // ================== GET MOVIE ID ==================
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
