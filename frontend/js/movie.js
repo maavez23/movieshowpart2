@@ -1,7 +1,6 @@
 // ================== GET MOVIE ID ==================
 const params = new URLSearchParams(window.location.search);
 const movieId = params.get("id");
-
 if (!movieId) {
   alert("Invalid movie");
   window.location.href = "index.html";
