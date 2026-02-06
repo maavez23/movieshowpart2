@@ -1,6 +1,9 @@
+const db = require("../config/db");
+
+// CREATE BOOKING
 exports.createBooking = async (req, res) => {
   try {
-    let {
+    const {
       user_id,
       movie_id,
       show_date,
@@ -9,29 +12,21 @@ exports.createBooking = async (req, res) => {
       total_price
     } = req.body;
 
-    // 🔴 TEMP FIX (until JWT auth)
-    if (!user_id) user_id = 1;
-
-    if (!movie_id || !show_date || !show_time || !seats?.length) {
-      return res.status(400).json({ message: "Invalid booking data" });
-    }
-
-    const result = await pool.query(
-      `
-      INSERT INTO bookings 
+    const sql = `
+      INSERT INTO bookings
       (user_id, movie_id, show_date, show_time, seats, total_price)
       VALUES ($1, $2, $3, $4, $5, $6)
       RETURNING id
-      `,
-      [
-        user_id,
-        movie_id,
-        show_date,
-        show_time,
-        seats.join(","), // ✅ array → string
-        total_price
-      ]
-    );
+    `;
+
+    const result = await db.query(sql, [
+      user_id,
+      movie_id,
+      show_date,
+      show_time,
+      seats.join(","),
+      total_price
+    ]);
 
     res.json({
       message: "Booking successful",
@@ -39,12 +34,12 @@ exports.createBooking = async (req, res) => {
     });
 
   } catch (err) {
-    console.error("BOOKING ERROR:", err);
-    res.status(500).json({ message: err.message });
+    console.error(err);
+    res.status(500).json(err);
   }
 };
 
-// ================== GET ALL BOOKINGS (ADMIN) ==================
+// GET ALL BOOKINGS (ADMIN)
 exports.getAllBookings = async (req, res) => {
   try {
     const sql = `
@@ -62,11 +57,11 @@ exports.getAllBookings = async (req, res) => {
       ORDER BY bookings.booking_time DESC
     `;
 
-    const result = await pool.query(sql);
-
+    const result = await db.query(sql);
     res.json(result.rows);
+
   } catch (err) {
-    console.error("DB ERROR:", err);
-    res.status(500).json({ error: err.message });
+    console.error(err);
+    res.status(500).json(err);
   }
 };
