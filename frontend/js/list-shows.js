@@ -1,64 +1,35 @@
-// ================== CONFIG ==================
-const API_BASE = "http://localhost:3000"; 
-// later → https://your-app.onrender.com
-
-const token = localStorage.getItem("token");
-
-// ================== FETCH & DISPLAY ALL MOVIES (ADMIN) ==================
-fetch(`${API_BASE}/api/movies`, {
-  headers: {
-    "Authorization": `Bearer ${token}`
-  }
-})
-  .then(async res => {
-    if (!res.ok) throw new Error("Failed to load data");
-    return res.json();
-  })
-  .then(movies => {
+fetch("http://localhost:3000/api/movies/admin/shows")
+  .then(res => res.json())
+  .then(shows => {
     const tbody = document.getElementById("showsBody");
     tbody.innerHTML = "";
 
-    if (!movies || movies.length === 0) {
+    if (shows.length === 0) {
       tbody.innerHTML = `
         <tr>
-          <td colspan="6" style="text-align:center;color:#999;">
-            No movies available
+          <td colspan="5" style="text-align:center;color:#888;">
+            No shows found
           </td>
-        </tr>`;
+        </tr>
+      `;
       return;
     }
 
-    const fragment = document.createDocumentFragment();
-
-    movies.forEach(movie => {
-      const tr = document.createElement("tr");
-
-      tr.innerHTML = `
-        <td>${movie.title}</td>
-        <td>${movie.description || "-"}</td>
-        <td>${movie.language || "-"}</td>
-        <td>${movie.duration || "-"}</td>
-        <td>${movie.rating || "-"}</td>
-        <td>
-          <button class="delete-btn" data-id="${movie.id}">
-            Delete
-          </button>
-        </td>
+    shows.forEach(show => {
+      tbody.innerHTML += `
+        <tr>
+          <td>${show.title}</td>
+          <td>-</td>
+          <td>-</td>
+          <td>-</td>
+          <td>${show.rating ?? "N/A"}</td>
+        </tr>
       `;
-
-      fragment.appendChild(tr);
     });
-
-    tbody.appendChild(fragment);
   })
   .catch(err => {
-    console.error("Error loading movies:", err);
-    document.getElementById("showsBody").innerHTML = `
-      <tr>
-        <td colspan="6" style="text-align:center;color:red;">
-          Failed to load data
-        </td>
-      </tr>`;
+    console.error(err);
+    alert("Failed to load shows");
   });
 
 // ================== DELETE MOVIE ==================
