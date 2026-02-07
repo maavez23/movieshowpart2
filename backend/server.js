@@ -1,9 +1,15 @@
+require("dotenv").config(); // local only
+
 const app = require("./app");
-require("dotenv").config();
 
 const PORT = process.env.PORT || 3000;
+app.use("/api", require("./routes/showRoutes"));
+router.post("/admin/shows", addShow);
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
-  console.log("DB HOST:", process.env.DB_HOST);
+  console.log(
+    "DATABASE_URL:",
+    process.env.DATABASE_URL ? "FOUND" : "MISSING"
+  );
 });
