@@ -38,21 +38,19 @@ exports.createBooking = async (req, res) => {
     res.status(500).json(err);
   }
 };
+const pool = require("../database/db");
 
-// GET ALL BOOKINGS (ADMIN)
 const getBookings = async (req, res) => {
   try {
     const result = await pool.query(`
       SELECT
         b.id,
-        u.name AS user_name,
         m.title AS movie_title,
         b.show_date,
         b.show_time,
         b.seats,
         b.total_price
       FROM bookings b
-      JOIN users u ON b.user_id = u.id
       JOIN movies m ON b.movie_id = m.id
       ORDER BY b.id DESC
     `);
