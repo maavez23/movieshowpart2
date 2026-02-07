@@ -1,10 +1,11 @@
 const express = require("express");
 const router = express.Router();
 
-const { addShow } = require("../controllers/showController");
+// 🔥 EXACT IMPORT
+const { addShow, getShows } = require("../controllers/showController");
 
-router.get("/admin/shows", getShows);
+// ROUTES
 router.post("/admin/shows", addShow);
-router.delete("/admin/shows/:id", deleteShow);
+router.get("/admin/shows", getShows);
 
 module.exports = router;
