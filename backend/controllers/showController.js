@@ -1,14 +1,9 @@
-const pool = require("../config/db");
+const pool = require("../database/db");
 
+// ================= ADD SHOW =================
 const addShow = async (req, res) => {
   try {
-    const {
-      movie_id,
-      show_date,
-      show_time,
-      price,
-      total_seats
-    } = req.body;
+    const { movie_id, show_date, show_time, price, total_seats } = req.body;
 
     const result = await pool.query(
       `INSERT INTO shows 
@@ -22,13 +17,13 @@ const addShow = async (req, res) => {
       message: "Show added successfully",
       show: result.rows[0]
     });
-
   } catch (err) {
     console.error("ADD SHOW ERROR:", err);
     res.status(500).json({ message: "Failed to add show" });
   }
 };
 
+// ================= GET SHOWS =================
 const getShows = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -38,6 +33,7 @@ const getShows = async (req, res) => {
         s.show_date,
         s.show_time,
         s.total_seats,
+        s.available_seats,
         m.rating
       FROM shows s
       JOIN movies m ON s.movie_id = m.id
@@ -46,9 +42,13 @@ const getShows = async (req, res) => {
 
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
+    console.error("GET SHOWS ERROR:", err);
     res.status(500).json({ message: "Failed to load shows" });
   }
 };
 
-module.exports = { addShow, getShows };
+// 🔥 MOST IMPORTANT LINE
+module.exports = {
+  addShow,
+  getShows
+};
