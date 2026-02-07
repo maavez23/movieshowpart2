@@ -1,3 +1,4 @@
+const API_BASE = "https://movieshowpart2.onrender.com";
 // ================== READ PARAMS ==================
 const params = new URLSearchParams(window.location.search);
 
