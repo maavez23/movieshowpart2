@@ -26,16 +26,15 @@ fetch(`${API_BASE}/api/bookings`)
     }
 
     data.forEach(b => {
-      table.innerHTML += `
-        <tr>
-          <td>${b.user_name || "N/A"}</td>
-          <td>${b.movie_title}</td>
-          <td>${b.show_date}</td>
-          <td>${b.show_time}</td>
-          <td>${b.seats}</td>
-          <td>₹${b.total_price}</td>
-        </tr>
-      `;
+    row.innerHTML = `
+  <td class="user" data-label="User">${b.user_name || "N/A"}</td>
+  <td data-label="Movie">${b.movie_title}</td>
+  <td data-label="Date">${new Date(b.show_date).toLocaleDateString()}</td>
+  <td data-label="Time">${b.show_time}</td>
+  <td class="seats" data-label="Seats">${b.seats}</td>
+  <td class="price" data-label="Price">₹${b.total_price}</td>
+`;
+
     });
   })
   .catch(err => {
