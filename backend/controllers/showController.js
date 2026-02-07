@@ -1,6 +1,4 @@
-const pool = require("../database/db");
-
-// ================= ADD SHOW =================
+const pool = require("../config/db");
 const addShow = async (req, res) => {
   try {
     const { movie_id, show_date, show_time, price, total_seats } = req.body;
