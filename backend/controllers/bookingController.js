@@ -1,7 +1,7 @@
-const db = require("../config/db");
+const pool = require("../config/db"); // ✅ ONE DB OBJECT ONLY
 
-// CREATE BOOKING
-exports.createBooking = async (req, res) => {
+// ================= CREATE BOOKING =================
+const createBooking = async (req, res) => {
   try {
     const {
       user_id,
@@ -19,12 +19,12 @@ exports.createBooking = async (req, res) => {
       RETURNING id
     `;
 
-    const result = await db.query(sql, [
+    const result = await pool.query(sql, [
       user_id,
       movie_id,
       show_date,
       show_time,
-      seats.join(","),
+      seats.join(","), // seats stored as text
       total_price
     ]);
 
@@ -34,10 +34,12 @@ exports.createBooking = async (req, res) => {
     });
 
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error("CREATE BOOKING ERROR:", err);
+    res.status(500).json({ message: "Booking failed" });
   }
 };
+
+// ================= GET BOOKINGS (ADMIN) =================
 const getBookings = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -60,4 +62,8 @@ const getBookings = async (req, res) => {
   }
 };
 
-module.exports = { getBookings };
+// ✅ EXPORT BOTH FUNCTIONS
+module.exports = {
+  createBooking,
+  getBookings
+};
