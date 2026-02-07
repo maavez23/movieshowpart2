@@ -18,7 +18,7 @@ if (email === "admin" && password === "admin") {
   localStorage.setItem("role", "ADMIN");
 
   setTimeout(() => {
-    window.location.href = "admin-booking.html";
+    window.location.href = "admin.html";
   }, 800);
 
   return;
