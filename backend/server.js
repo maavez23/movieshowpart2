@@ -3,7 +3,7 @@ require("dotenv").config(); // local only
 const app = require("./app");
 
 const PORT = process.env.PORT || 3000;
-app.use("/api", require("./routes/showRoutes"));
+
 router.post("/admin/shows", addShow);
 
 app.listen(PORT, () => {
