@@ -1,9 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const { getBookings } = require("../controllers/bookingController");
+const {
+  createBooking,
+  getBookings
+} = require("../controllers/bookingController");
 
-// ✅ ONLY GET — admin view
+// USER books ticket
+router.post("/", createBooking);
+
+// ADMIN views bookings
 router.get("/", getBookings);
 
 module.exports = router;
