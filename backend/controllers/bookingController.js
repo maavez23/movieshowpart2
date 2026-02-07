@@ -38,8 +38,6 @@ exports.createBooking = async (req, res) => {
     res.status(500).json(err);
   }
 };
-const pool = require("../database/db");
-
 const getBookings = async (req, res) => {
   try {
     const result = await pool.query(`
