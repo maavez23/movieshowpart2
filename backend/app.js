@@ -26,5 +26,6 @@ app.use(express.static(frontendPath));
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
+app.use("/api", require("./routes/showRoutes"));
 
 module.exports = app;
