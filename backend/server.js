@@ -4,7 +4,7 @@ const app = require("./app");
 
 const PORT = process.env.PORT || 3000;
 
-router.post("/admin/shows", addShow);
+
 
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
