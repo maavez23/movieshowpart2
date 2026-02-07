@@ -1,5 +1,5 @@
 // ================== CONFIG ==================
-const API_BASE = "http://localhost:3000";
+
 // later → https://your-app.onrender.com
 
 // ================== IMAGE PREVIEW ==================
