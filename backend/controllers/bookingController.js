@@ -40,28 +40,28 @@ exports.createBooking = async (req, res) => {
 };
 
 // GET ALL BOOKINGS (ADMIN)
-exports.getAllBookings = async (req, res) => {
+const getBookings = async (req, res) => {
   try {
-    const sql = `
-      SELECT 
-        bookings.id,
-        users.email,
-        movies.title AS movie,
-        bookings.show_date,
-        bookings.show_time,
-        bookings.seats,
-        bookings.total_price
-      FROM bookings
-      JOIN users ON bookings.user_id = users.id
-      JOIN movies ON bookings.movie_id = movies.id
-      ORDER BY bookings.booking_time DESC
-    `;
+    const result = await pool.query(`
+      SELECT
+        b.id,
+        u.name AS user_name,
+        m.title AS movie_title,
+        b.show_date,
+        b.show_time,
+        b.seats,
+        b.total_price
+      FROM bookings b
+      JOIN users u ON b.user_id = u.id
+      JOIN movies m ON b.movie_id = m.id
+      ORDER BY b.id DESC
+    `);
 
-    const result = await db.query(sql);
     res.json(result.rows);
-
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error("GET BOOKINGS ERROR:", err);
+    res.status(500).json({ message: "Failed to load bookings" });
   }
 };
+
+module.exports = { getBookings };
