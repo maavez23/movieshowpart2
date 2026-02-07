@@ -9,19 +9,21 @@ function login() {
     return;
   }
 
-  // 🔑 ADMIN LOGIN (DEMO)
-  if (email === "admin" && password === "admin") {
-    msg.style.color = "#2ecc71";
-    msg.innerText = "Admin login successful";
+if (email === "admin" && password === "admin") {
+  msg.style.color = "#2ecc71";
+  msg.innerText = "Admin login successful";
 
-    localStorage.setItem("role", "ADMIN");
+  // ✅ FAKE TOKEN FOR ADMIN
+  localStorage.setItem("token", "ADMIN_DEMO_TOKEN");
+  localStorage.setItem("role", "ADMIN");
 
-    setTimeout(() => {
-      window.location.href = "admin.html";
-    }, 800);
+  setTimeout(() => {
+    window.location.href = "admin-booking.html";
+  }, 800);
 
-    return;
-  }
+  return;
+}
+
 
   // 👤 USER LOGIN (API)
   fetch(`${API_BASE}/api/auth/login`, {
