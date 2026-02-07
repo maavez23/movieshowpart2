@@ -8,10 +8,11 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-/* ================== API ROUTES ================== */
+/* ================== API ROUTES (🔥 ALWAYS FIRST 🔥) */
 app.use("/api/movies", require("./routes/movieRoutes"));
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
+app.use("/api", require("./routes/showRoutes")); // 👈 MOVE UP
 
 /* ================== HEALTH CHECK ================== */
 app.get("/health", (req, res) => {
@@ -22,10 +23,9 @@ app.get("/health", (req, res) => {
 const frontendPath = path.join(__dirname, "../frontend");
 app.use(express.static(frontendPath));
 
-/* ✅ SPA FALLBACK — NODE 22 SAFE */
+/* ================== SPA FALLBACK (🔥 LAST ONLY 🔥) */
 app.use((req, res) => {
   res.sendFile(path.join(frontendPath, "index.html"));
 });
-app.use("/api", require("./routes/showRoutes"));
 
 module.exports = app;
