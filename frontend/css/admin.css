@@ -175,3 +175,92 @@ body {
   border-radius: 12px;
   display: none;
 }
+/* ================== ADMIN BOOKINGS TABLE ================== */
+
+.booking-title {
+  font-size: 28px;
+  margin-bottom: 25px;
+  letter-spacing: 1px;
+}
+
+.booking-table {
+  width: 100%;
+  margin-top: 20px;
+  border-collapse: collapse;
+  background: #1a1a1a;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(255, 77, 109, 0.15);
+}
+
+.booking-table thead {
+  background: linear-gradient(90deg, #ff4d6d, #ff2e63);
+}
+
+.booking-table th {
+  padding: 14px;
+  text-align: left;
+  font-size: 14px;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+}
+
+.booking-table td {
+  padding: 14px;
+  border-bottom: 1px solid #2c2c2c;
+  font-size: 15px;
+  color: #eaeaea;
+}
+
+.booking-table tbody tr:hover {
+  background: #21212b;
+}
+
+.booking-table td.price {
+  color: #00ff99;
+  font-weight: 600;
+}
+
+.booking-table td.seats {
+  color: #ffb703;
+  font-weight: 500;
+}
+
+.booking-table td.user {
+  opacity: 0.7;
+}
+
+/* ================== EMPTY STATE ================== */
+.no-bookings {
+  padding: 25px;
+  text-align: center;
+  color: #aaa;
+}
+
+/* ================== MOBILE RESPONSIVE ================== */
+@media (max-width: 768px) {
+  .booking-table thead {
+    display: none;
+  }
+
+  .booking-table tr {
+    display: block;
+    margin-bottom: 15px;
+    background: #1c1c1c;
+    border-radius: 12px;
+    padding: 10px;
+  }
+
+  .booking-table td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: none;
+  }
+
+  .booking-table td::before {
+    content: attr(data-label);
+    color: #ff4d6d;
+    font-weight: bold;
+  }
+}
