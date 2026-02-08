@@ -12,6 +12,12 @@ app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/movies", require("./routes/movieRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
 app.use("/api", require("./routes/showRoutes"));   // 🔥 VERY IMPORTANT
+// ❌ API ERROR HANDLER (STOP HTML ON API ERROR)
+app.use("/api", (err, req, res, next) => {
+  console.error("API ERROR:", err);
+  res.status(500).json({ message: "Internal API Error" });
+});
+
 
 /* ================== FRONTEND ================== */
 const frontendPath = path.join(__dirname, "../frontend");
