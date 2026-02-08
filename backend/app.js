@@ -11,7 +11,8 @@ app.use(express.json());
 app.use("/api/auth", require("./routes/authRoutes"));
 app.use("/api/movies", require("./routes/movieRoutes"));
 app.use("/api/bookings", require("./routes/bookingRoutes"));
-app.use("/api", require("./routes/showRoutes"));   // 🔥 VERY IMPORTANT
+app.use("/api", require("./routes/showRoutes"));  
+app.use("/api", require("./routes/dashboardRoutes"));
 // ❌ API ERROR HANDLER (STOP HTML ON API ERROR)
 app.use("/api", (err, req, res, next) => {
   console.error("API ERROR:", err);
