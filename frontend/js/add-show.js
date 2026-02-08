@@ -9,8 +9,6 @@ fetch(`${API_BASE}/api/movies`)
       select.appendChild(option);
     });
   });
-
-const API_BASE = "https://movieshowpart2.onrender.com";
 const posterInput = document.getElementById("posterInput");
 const preview = document.getElementById("preview");
 const form = document.getElementById("addShowForm");
