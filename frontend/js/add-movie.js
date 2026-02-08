@@ -1,14 +1,16 @@
-document.getElementById("movieForm").addEventListener("submit", async e => {
+const form = document.getElementById("movieForm");
+
+form.addEventListener("submit", async e => {
   e.preventDefault();
 
   const data = {
     title: title.value,
+    description: description.value,
     language: language.value,
-    release_year: release_year.value,
     duration: duration.value,
     rating: rating.value,
-    poster: poster.value,
-    description: description.value
+    release_year: release_year.value,
+    poster: poster.value   // URL / filename
   };
 
   try {
@@ -22,10 +24,10 @@ document.getElementById("movieForm").addEventListener("submit", async e => {
     if (!res.ok) throw new Error(json.message);
 
     alert("Movie added successfully ✅");
-    e.target.reset();
+    form.reset();
 
   } catch (err) {
-    alert("Error adding movie ❌");
     console.error(err);
+    alert("Error adding movie ❌");
   }
 });
