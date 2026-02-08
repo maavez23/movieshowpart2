@@ -3,15 +3,16 @@ const pool = require("../config/db");
 const getDashboardStats = async (req, res) => {
   try {
     const bookings = await pool.query("SELECT COUNT(*) FROM bookings");
-    const revenue = await pool.query("SELECT COALESCE(SUM(total_price),0) FROM bookings");
+    const revenue = await pool.query(
+      "SELECT COALESCE(SUM(total_price), 0) FROM bookings"
+    );
     const shows = await pool.query("SELECT COUNT(*) FROM shows");
-    const users = await pool.query("SELECT COUNT(*) FROM users");
 
     res.json({
       totalBookings: Number(bookings.rows[0].count),
       totalRevenue: Number(revenue.rows[0].coalesce),
       activeShows: Number(shows.rows[0].count),
-      totalUsers: Number(users.rows[0].count)
+      totalUsers: 0   // temporary
     });
 
   } catch (err) {
