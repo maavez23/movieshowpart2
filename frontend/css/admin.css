@@ -264,3 +264,96 @@ body {
     font-weight: bold;
   }
 }
+/* ================= ADD MOVIE FORM IMPROVEMENTS ================= */
+
+.main h1,
+.main h2 {
+  margin-bottom: 20px;
+  letter-spacing: 0.5px;
+}
+
+/* Form card enhancement */
+form#movieForm {
+  max-width: 520px;
+  background: #1a1a1a;
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 0 25px rgba(255, 77, 109, 0.12);
+}
+
+/* Inputs + textarea */
+#movieForm input,
+#movieForm textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 14px;
+  border-radius: 10px;
+  border: none;
+  outline: none;
+  background: #111;
+  color: white;
+  font-size: 14px;
+}
+
+#movieForm textarea {
+  resize: none;
+  min-height: 90px;
+}
+
+/* Input focus */
+#movieForm input:focus,
+#movieForm textarea:focus {
+  outline: 2px solid #ff4d6d;
+}
+
+/* Submit button */
+#movieForm button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 10px;
+  background: linear-gradient(135deg, #ff4d6d, #ff2e63);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  font-size: 15px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+#movieForm button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 20px rgba(255, 77, 109, 0.3);
+}
+
+/* Placeholder color */
+#movieForm input::placeholder,
+#movieForm textarea::placeholder {
+  color: #888;
+}
+
+/* ================= OPTIONAL: MOVIE POSTER PREVIEW (FUTURE) ================= */
+
+.movie-poster-preview {
+  margin-top: 15px;
+  width: 150px;
+  border-radius: 14px;
+  display: none;
+  box-shadow: 0 0 20px rgba(255, 77, 109, 0.25);
+}
+
+/* ================= RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+  .sidebar {
+    display: none;
+  }
+
+  .main {
+    padding: 20px;
+  }
+
+  form#movieForm {
+    width: 100%;
+  }
+}
