@@ -1,17 +1,8 @@
 const pool = require("../config/db");
 
-// ================== GET ALL MOVIES ==================
-exports.getMovies = async (req, res) => {
-  try {
-    const result = await pool.query("SELECT * FROM movies");
-    res.json(result.rows);
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-};
 
-// ================== ADD MOVIE ==================
-exports.addMovie = async (req, res) => {
+/* ================= ADD MOVIE ================= */
+const addMovie = async (req, res) => {
   try {
     const {
       title,
@@ -23,37 +14,39 @@ exports.addMovie = async (req, res) => {
       poster
     } = req.body;
 
-    await pool.query(
-      `
-      INSERT INTO movies 
+    if (!title || !language || !release_year) {
+      return res.status(400).json({ message: "Required fields missing" });
+    }
+
+    const result = await pool.query(
+      `INSERT INTO movies 
       (title, description, language, duration, rating, release_year, poster)
-      VALUES ($1, $2, $3, $4, $5, $6, $7)
-      `,
+      VALUES ($1,$2,$3,$4,$5,$6,$7)
+      RETURNING *`,
       [title, description, language, duration, rating, release_year, poster]
     );
 
-    res.json({ message: "Movie Added" });
+    res.status(201).json({
+      message: "Movie added successfully",
+      movie: result.rows[0]
+    });
+
   } catch (err) {
-    res.status(400).json({ error: err.message });
+    console.error("ADD MOVIE ERROR:", err);
+    res.status(500).json({ message: "Failed to add movie" });
   }
 };
 
-// ================== GET MOVIE BY ID ==================
-exports.getMovieById = async (req, res) => {
+/* ================= LIST MOVIES ================= */
+const getMovies = async (req, res) => {
   try {
-    const movieId = req.params.id;
-
     const result = await pool.query(
-      "SELECT * FROM movies WHERE id = $1",
-      [movieId]
+      "SELECT * FROM movies ORDER BY id DESC"
     );
-
-    if (result.rows.length === 0) {
-      return res.status(404).json({ message: "Movie not found" });
-    }
-
-    res.json(result.rows[0]);
+    res.json(result.rows);
   } catch (err) {
-    res.status(500).json({ error: err.message });
+    res.status(500).json({ message: "Failed to fetch movies" });
   }
 };
+
+module.exports = { addMovie, getMovies };
