@@ -1,8 +1,5 @@
-// ================== CONFIG ==================
+const API_BASE = "https://movieshowpart2.onrender.com";
 
-// later → https://your-app.onrender.com
-
-// ================== IMAGE PREVIEW ==================
 const posterInput = document.getElementById("posterInput");
 const preview = document.getElementById("preview");
 const form = document.getElementById("addShowForm");
