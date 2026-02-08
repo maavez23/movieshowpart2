@@ -1,6 +1,4 @@
 const pool = require("../config/db");
-
-
 const addShow = async (req, res) => {
   try {
     const {
@@ -14,11 +12,19 @@ const addShow = async (req, res) => {
     console.log("REQ BODY:", req.body);
 
     const result = await pool.query(
-      `INSERT INTO shows
+      `
+      INSERT INTO shows
       (movie_id, show_date, show_time, price, total_seats, available_seats)
       VALUES ($1,$2,$3,$4,$5,$5)
-      RETURNING *`,
-      [movie_id, show_date, show_time, price, total_seats]
+      RETURNING *
+      `,
+      [
+        parseInt(movie_id),        // 🔥 FIX
+        show_date,                 // date OK
+        show_time,                 // time OK
+        parseInt(price),           // 🔥 FIX
+        parseInt(total_seats)      // 🔥 FIX
+      ]
     );
 
     res.status(201).json({
@@ -32,8 +38,6 @@ const addShow = async (req, res) => {
   }
 };
 
-
-
 const getShows = async (req, res) => {
   try {
     const result = await pool.query(`
@@ -45,8 +49,7 @@ const getShows = async (req, res) => {
 
     res.json(result.rows);
   } catch (err) {
-    console.error(err);
-    res.status(500).json({ message: "Failed to load shows" });
+    res.status(500).json({ message: err.message });
   }
 };
 
