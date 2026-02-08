@@ -26,32 +26,18 @@
   <main class="main">
     <h1>Add New Show</h1>
 
-    <form id="addShowForm" class="form-card">
+   <h2>Add Movie</h2>
 
-      <label>Movie Name</label>
-      <input type="text" id="movie" placeholder="Enter movie name" required>
-
-      <label>Language</label>
-      <input type="text" id="language" placeholder="English / Hindi" required>
-
-      <label>Date</label>
-      <input type="date" id="date" required>
-
-      <label>Time</label>
-      <input type="time" id="time" required>
-      <label>Ticket Price (₹)</label>
-      <input type="number" id="price" placeholder="100" required>
-      <label>Total Seats</label>
-      <input type="number" id="seats" placeholder="90" required>
-      <label>Movie Poster</label>
-      <div class="upload-box">
-        <input type="file" id="posterInput" accept="image/*">
-        <label for="posterInput" class="upload-btn">Upload Poster</label>
-        <img id="preview" class="poster-preview">
-      </div>
-      <button type="submit" class="btn-primary">Add Show</button>
-      <p id="msg" class="msg"></p>
-    </form>
+<form id="movieForm">
+  <input id="title" placeholder="Movie Title" required />
+  <input id="language" placeholder="Language" required />
+  <input id="release_year" type="number" placeholder="Release Year" required />
+  <input id="duration" placeholder="Duration (2h 30m)" />
+  <input id="rating" type="number" step="0.1" placeholder="Rating" />
+  <input id="poster" placeholder="Poster URL / filename" />
+  <textarea id="description" placeholder="Description"></textarea>
+  <button>Add Movie</button>
+</form>
   </main>
 </div>
 <script src="js/config.js"></script>
