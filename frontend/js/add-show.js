@@ -1,9 +1,19 @@
-const API_BASE = "https://movieshowpart2.onrender.com";
+fetch(`${API_BASE}/api/movies`)
+  .then(res => res.json())
+  .then(movies => {
+    const select = document.getElementById("movie");
+    movies.forEach(m => {
+      const option = document.createElement("option");
+      option.value = m.id;       // 🔥 REAL movie_id
+      option.textContent = m.title;
+      select.appendChild(option);
+    });
+  });
 
+const API_BASE = "https://movieshowpart2.onrender.com";
 const posterInput = document.getElementById("posterInput");
 const preview = document.getElementById("preview");
 const form = document.getElementById("addShowForm");
-
 if (posterInput) {
   posterInput.addEventListener("change", () => {
     const file = posterInput.files[0];
